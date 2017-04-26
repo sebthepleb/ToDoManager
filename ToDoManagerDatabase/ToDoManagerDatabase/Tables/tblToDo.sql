@@ -1,0 +1,9 @@
+﻿CREATE TABLE [dbo].[tblToDo]
+(
+	[intToDoId] INT NOT NULL PRIMARY KEY IDENTITY,
+	[vchTitle] VARCHAR(255) NOT NULL,
+	[vchDetail] VARCHAR(MAX) NULL,
+	[dteDateCreated] DATETIME NOT NULL DEFAULT GETDATE(),
+	[dteDateUpdated] DATETIME NULL,
+	[vchUpdateUsername] VARCHAR(255)NOT NULL
+)
