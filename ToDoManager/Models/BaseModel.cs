@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace BusinessLayer.Models
+namespace Models
 {
     public class BaseModel
     {

@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using BusinessLayer.Models;
+using Models.ToDoManager;
 
 namespace BusinessLayer.Managers
 {

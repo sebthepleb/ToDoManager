@@ -1,4 +1,4 @@
-﻿namespace BusinessLayer.Models
+﻿namespace Models.ToDoManager
 {
     public class ToDoModel : BaseModel
     {
