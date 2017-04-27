@@ -6,16 +6,16 @@ namespace BusinessLayer.Managers
 {
     public interface IToDoManager
     {
-        IEnumerable<ToDoModel> GetAllToDos();
+        List<ToDoModel> GetAllToDos();
         ToDoModel GetToDoById(long id);
         ToDoModel SaveToDo(ToDoModel model);
     }
 
     public class ToDoManager : IToDoManager
     {
-        public IEnumerable<ToDoModel> GetAllToDos()
+        public List<ToDoModel> GetAllToDos()
         {
-            return new[]
+            return new List<ToDoModel>
             {
                 new ToDoModel
                 {
