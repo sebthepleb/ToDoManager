@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ToDoManager", "ToDoManager\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BusinessLayer", "BusinessLayer\BusinessLayer.csproj", "{872C54D0-2CFE-4F88-A766-2F1753A41E3B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Models", "Models\Models.csproj", "{EDA1E77F-65B2-4464-8587-46CA5925A1FB}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{872C54D0-2CFE-4F88-A766-2F1753A41E3B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{872C54D0-2CFE-4F88-A766-2F1753A41E3B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{872C54D0-2CFE-4F88-A766-2F1753A41E3B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EDA1E77F-65B2-4464-8587-46CA5925A1FB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EDA1E77F-65B2-4464-8587-46CA5925A1FB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EDA1E77F-65B2-4464-8587-46CA5925A1FB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EDA1E77F-65B2-4464-8587-46CA5925A1FB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
