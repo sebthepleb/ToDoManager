@@ -1,7 +1,11 @@
 ﻿@{
     ViewBag.Title = "Manage";
 }
-@Scripts.Render("~/bundles/knockout")
+@Scripts.Render("~/bundles/knockout", 
+    "~/bundles/jquery", 
+    "~/Scripts/Common.js", 
+    "~/Scripts/ViewModels/ListViewModel.js", 
+    "~/Scripts/Models/ToDo.js")
 
 <div class="well">
     <p>To do list here!</p>
