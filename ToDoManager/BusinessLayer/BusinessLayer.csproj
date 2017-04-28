@@ -42,6 +42,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Framework\Ioc.cs" />
+    <Compile Include="Framework\IocBulkLoad.cs" />
     <Compile Include="Managers\ToDoManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

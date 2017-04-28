@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using BusinessLayer.Framework;
 using Models.ToDoManager;
 
 namespace BusinessLayer.Managers
 {
+    [IocBulkLoad]
     public interface IToDoManager
     {
         List<ToDoModel> GetAllToDos();

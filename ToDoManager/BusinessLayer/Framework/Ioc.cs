@@ -1,25 +1,55 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Reflection;
 
 namespace BusinessLayer.Framework
 {
     public static class Ioc
     {
-        private static readonly Dictionary<Type, object> _instanceByType;
+        private static readonly Dictionary<Type, Type> _typesByInterface;
+        private static readonly Dictionary<Type, object> _instanceByInterface;
 
         static Ioc()
         {
-            _instanceByType = new Dictionary<Type, object>();
+            _typesByInterface = new Dictionary<Type, Type>();
+            _instanceByInterface = new Dictionary<Type, object>();
         }
 
-        public static T Get<T>() where T : class
+        public static void Initialise()
         {
-            var type = typeof(T);
+            var types = Assembly.GetExecutingAssembly().GetTypes().ToArray();
+            var bulkLoadInterfaceTypes = types.Where(t => t.IsInterface && t.GetCustomAttribute<IocBulkLoad>() != null);
 
-            if (!_instanceByType.ContainsKey(type))
-                _instanceByType.Add(type, Activator.CreateInstance<T>());
+            foreach (var interfaceType in bulkLoadInterfaceTypes)
+            {
+                var inheritingType = types.FirstOrDefault(t => !t.IsInterface && interfaceType.IsAssignableFrom(t));
 
-            return (T) _instanceByType[type];
+                if (inheritingType != null)
+                    _typesByInterface.Add(interfaceType, inheritingType);
+            }
+        }
+
+        public static TInterface Get<TInterface>() where TInterface : class
+        {
+            var type = typeof(TInterface);
+
+            if (!_instanceByInterface.ContainsKey(type))
+                _instanceByInterface.Add(type, CreateInstance<TInterface>());
+
+            return (TInterface) _instanceByInterface[type];
+        }
+
+        private static TInterface CreateInstance<TInterface>() where TInterface : class
+        {
+            var interfaceType = typeof(TInterface);
+
+            if (!_typesByInterface.ContainsKey(interfaceType))
+                throw new Exception("Failed to find interface in the store.");
+
+            var type = _typesByInterface[interfaceType];
+
+            return (TInterface) Activator.CreateInstance(type);
         }
     }
 }
