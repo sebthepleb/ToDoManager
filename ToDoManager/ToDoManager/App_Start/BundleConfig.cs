@@ -30,7 +30,8 @@ namespace ToDoManager
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                 "~/Content/bootstrap-flatly.css",
-                "~/Content/font-awesome.css"));
+                "~/Content/font-awesome.css",
+                "~/Content/Site.css"));
         }
     }
 }

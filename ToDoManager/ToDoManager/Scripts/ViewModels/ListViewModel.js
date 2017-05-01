@@ -1,6 +1,14 @@
 ﻿(function() {
     var viewModel = (new function() {
         this.ToDos = ko.observableArray();
+        this.Loading = ko.observable(true);
+        this.Errored = ko.observable(false);
+
+        var vm = this;
+
+        this.Empty = ko.computed(function() {
+            return vm.ToDos().length === 0;
+        });
     });
 
     viewModel.LoadToDos = function(models) {
@@ -14,8 +22,15 @@
         method: Verbs.GET,
         success: function(models) {
             viewModel.LoadToDos(models);
+            viewModel.Loading(false);
+        },
+        error: function() {
+            viewModel.Loading(false);
+            viewModel.Errored(true);
         }
     });
 
-    ko.applyBindings(viewModel);
+    $(function() {
+        ko.applyBindings(viewModel);
+    });
 })();

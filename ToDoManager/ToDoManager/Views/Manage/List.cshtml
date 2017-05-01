@@ -3,10 +3,45 @@
 }
 @Scripts.Render("~/bundles/knockout", 
     "~/bundles/jquery", 
+    "~/bundles/moment", 
     "~/Scripts/Common.js", 
     "~/Scripts/ViewModels/ListViewModel.js", 
     "~/Scripts/Models/ToDo.js")
 
-<div class="well">
-    <p>To do list here!</p>
+<div class="well inline-paragraph">
+    <p>View and edit your To Do list here!</p><br/>
+    <p>Simply click on an item to edit it.</p>
+    <a class="btn btn-default btn-sm pull-right" style="margin-top: -1.5em;"><i class="fa fa-plus"></i> Add</a>
+</div>
+
+<div class="alert alert-danger" style="display: none;" data-bind="visible: Errored()">
+    <h4>Oops, something went wrong.</h4>
+    <p>We might be experiencing technical difficulties, please try again.
+    <p>If the problem persists, please contact us by clicking @Html.ActionLink("here", "Contact", "Home").</p>
+</div>
+
+<div class="panel panel-default" data-bind="visible: !Errored()">
+    <div class="text-center panel-body" style="display: none;" data-bind="visible: !Loading() && Empty()">
+        <h3>You have nothing to do!</h3>
+    </div>
+    <div class="text-center panel-body" data-bind="visible: Loading()">
+        <i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i>
+        <h3>Loading...</h3>
+    </div>
+    <table class="table table-striped table-hover" style="display: none;" data-bind="visible: !Empty() && !Loading()">
+        <thead>
+        <tr class="active">
+            <th class="col-xs-3">Title</th>
+            <th class="col-xs-5">Detail</th>
+            <th class="col-xs-2">Updated</th>
+        </tr>
+        </thead>
+        <tbody data-bind="foreach: ToDos" style="cursor: pointer;">
+        <tr>
+            <td data-bind="text: Title"></td>
+            <td data-bind="text: Detail"></td>
+            <td data-bind="date: DateUpdated || DateCreated"></td>
+        </tr>
+        </tbody>
+    </table>
 </div>

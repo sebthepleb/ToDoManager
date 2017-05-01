@@ -1,0 +1,19 @@
+﻿@model ToDoManager.Models.ContactModel
+
+@{
+    ViewBag.Title = "Contact";
+}
+
+<div class="well">
+    <p>You can contact us by using the information.</p>
+    <table>
+        <tr>
+            <td class="mainColumn">Name</td>
+            <td>@Model.Name</td>
+        </tr>
+        <tr>
+            <td class="mainColumn">Email</td>
+            <td>@Model.Email</td>
+        </tr>
+    </table>
+</div>

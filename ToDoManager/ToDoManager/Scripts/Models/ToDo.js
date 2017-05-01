@@ -6,6 +6,6 @@
     this.Id = model.Id;
     this.Title = ko.observable(model.Title);
     this.Detail = ko.observable(model.Detail);
-    this.DateCreated = model.DateCreated;
-    this.DateUpdated = model.DateUpdated;
+    this.DateCreated = new Date(model.DateCreated);
+    this.DateUpdated = model.DateUpdated ? new Date(model.DateUpdated) : null;
 }
