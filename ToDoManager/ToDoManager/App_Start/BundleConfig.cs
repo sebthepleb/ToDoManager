@@ -22,10 +22,15 @@ namespace ToDoManager
                 "~/Scripts/bootstrap.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/knockout").Include(
-                "~/Scripts/knockout-{version}.js"));
+                "~/Scripts/knockout-{version}.js",
+                "~/Scripts/BindingHandlers/*.js"));
+
+            bundles.Add(new ScriptBundle("~/bundles/moment").Include(
+                "~/Scripts/moment*"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
-                "~/Content/bootstrap-flatly.css"));
+                "~/Content/bootstrap-flatly.css",
+                "~/Content/font-awesome.css"));
         }
     }
 }
