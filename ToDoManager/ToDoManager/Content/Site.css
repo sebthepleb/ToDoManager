@@ -12,3 +12,15 @@
     font-weight: bold;
     padding-right: 0.5em;
 }
+
+ol li .fa-check {
+    color: #18bc9c;
+}
+
+ol li .fa-minus {
+    color: #e08e0b;
+}
+
+ol li .fa-close {
+    color: #e74c3c;
+}
