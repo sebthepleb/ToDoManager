@@ -28,12 +28,26 @@ namespace ToDoManager.Controllers
             return Ok(todo);
         }
 
-        [HttpPut]
         [HttpPost]
         [Route]
         [ResponseType(typeof(ToDoModel))]
-        public IHttpActionResult SaveToDo(ToDoModel model)
+        public IHttpActionResult CreateToDo(ToDoModel model)
         {
+            var todo = Ioc.Get<IToDoManager>().SaveToDo(model);
+            return Ok(todo);
+        }
+
+        [HttpPut]
+        [Route("{id:long}")]
+        [ResponseType(typeof(ToDoModel))]
+        public IHttpActionResult SaveToDo(long id, ToDoModel model)
+        {
+            if (model == null)
+                return BadRequest("The ToDo model was not provided.");
+
+            // Treat the Id parameter as authoritative.
+            model.Id = id;
+
             var todo = Ioc.Get<IToDoManager>().SaveToDo(model);
             return Ok(todo);
         }

@@ -32,11 +32,18 @@ function PostToController(options) {
     if (options == null || typeof(options) != "object")
         return;
 
+    // If there isn't any data, or it's already a string, leave it as is.
+    // If the data isn't a string, try to stringify it.
+    var data = !options.data || typeof (options.data) == "string"
+        ? options.data
+        : JSON.stringify(options.data);
+
     $.ajax({
         url: window.baseApiUrl + options.url,
         method: options.method,
         dataType: "json",
-        data: options.data,
+        data: data,
+        contentType: "application/json",
         success: options.success,
         error: options.error || genericErrorHandler
     });

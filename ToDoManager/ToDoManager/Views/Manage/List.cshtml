@@ -59,6 +59,12 @@
                         <label for="detail">Detail:</label>
                         <textarea class="form-control" id="detail" data-bind="value: SelectedToDo().Detail"></textarea>
                     </div>
+                    <div class="alert alert-danger" style="display: none;" data-bind="visible: SaveErrored()">
+                        <h4>Oops, something went wrong.</h4>
+                        <p>Unfortunately there was an error when trying to save your to-do.</p>
+                        <p>We might be experiencing technical difficulties, so please try again.
+                        <p>If the problem persists, please contact us by clicking @Html.ActionLink("here", "Contact", "Home").</p>
+                    </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
