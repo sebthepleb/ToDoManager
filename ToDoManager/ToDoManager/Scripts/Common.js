@@ -1,4 +1,7 @@
-﻿var Verbs = {
+﻿// If there isn't a base API URL, default to the root of the site.
+window.baseApiUrl = window.baseApiUrl || "/";
+
+var Verbs = {
     GET: "GET",
     PUT: "PUT",
     POST: "POST",
@@ -30,7 +33,7 @@ function PostToController(options) {
         return;
 
     $.ajax({
-        url: options.url,
+        url: window.baseApiUrl + options.url,
         method: options.method,
         dataType: "json",
         data: options.data,

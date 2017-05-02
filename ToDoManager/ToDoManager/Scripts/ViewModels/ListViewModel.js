@@ -18,7 +18,7 @@
     };
 
     PostToController({
-        url: "/api/v1/ToDo/",
+        url: "api/v1/ToDo/",
         method: Verbs.GET,
         success: function(models) {
             viewModel.LoadToDos(models);
