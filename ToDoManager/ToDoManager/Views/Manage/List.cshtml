@@ -1,12 +1,7 @@
 ﻿@{
     ViewBag.Title = "Manage";
 }
-@Scripts.Render("~/bundles/knockout", 
-    "~/bundles/jquery", 
-    "~/bundles/moment", 
-    "~/Scripts/Common.js", 
-    "~/Scripts/ViewModels/ListViewModel.js", 
-    "~/Scripts/Models/ToDo.js")
+@Scripts.Render("~/Scripts/ViewModels/ListViewModel.js", "~/Scripts/Models/ToDo.js")
 
 <div class="well inline-paragraph">
     <p>View and edit your To Do list here!</p><br/>
@@ -16,7 +11,8 @@
 
 <div class="alert alert-danger" style="display: none;" data-bind="visible: Errored()">
     <h4>Oops, something went wrong.</h4>
-    <p>We might be experiencing technical difficulties, please try again.
+    <p>Unfortunately there was an error when trying to load your to-do's.</p>
+    <p>We might be experiencing technical difficulties, so please try again.
     <p>If the problem persists, please contact us by clicking @Html.ActionLink("here", "Contact", "Home").</p>
 </div>
 

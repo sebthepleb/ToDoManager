@@ -24,3 +24,8 @@ ol li .fa-minus {
 ol li .fa-close {
     color: #e74c3c;
 }
+
+#uncaughtErrorModal .modal-content {
+    background: #e74c3c;
+    color: #ffffff;
+}
