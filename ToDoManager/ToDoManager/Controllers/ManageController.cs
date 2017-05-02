@@ -4,7 +4,7 @@ namespace ToDoManager.Controllers
 {
     public class ManageController : Controller
     {
-        public ActionResult List()
+        public ActionResult Manage()
         {
             return View();
         }

@@ -1,10 +1,10 @@
 ﻿@{
     ViewBag.Title = "Manage";
 }
-@Scripts.Render("~/Scripts/Models/ToDo.js", "~/Scripts/ViewModels/ListViewModel.js")
+@Scripts.Render("~/Scripts/Models/ToDo.js", "~/Scripts/ViewModels/ManageViewModel.js")
 
 <div class="well inline-paragraph">
-    <p>View and edit your To Do list here!</p><br/>
+    <p>View and edit your To-Do list here!</p><br/>
     <p>Simply click on an item to edit it.</p>
     <a class="btn btn-default btn-sm pull-right" style="margin-top: -1.5em;" data-bind="click: AddToDo"><i class="fa fa-plus"></i> Add</a>
 </div>
@@ -47,7 +47,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h4 class="modal-title" data-bind="text: SelectedToDo().Id == null ? 'Create To Do' : 'Edit To Do'"></h4>
+                <h4 class="modal-title" data-bind="text: SelectedToDo().Id == null ? 'Create To-Do' : 'Edit To-Do'"></h4>
             </div>
             <form data-bind="submit: SaveToDo">
                 <div class="modal-body">
