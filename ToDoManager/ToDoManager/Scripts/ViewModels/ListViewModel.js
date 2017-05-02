@@ -3,6 +3,7 @@
         this.ToDos = ko.observableArray();
         this.Loading = ko.observable(true);
         this.Errored = ko.observable(false);
+        this.SelectedToDo = ko.observable(new ToDo());
 
         var vm = this;
 
@@ -15,6 +16,19 @@
         models.forEach(function(model) {
             viewModel.ToDos.push(new ToDo(model));
         });
+    };
+
+    viewModel.EditToDo = function(todo) {
+        viewModel.SelectedToDo(todo);
+        $("#editModal").modal("show");
+    };
+
+    viewModel.AddToDo = function() {
+        viewModel.EditToDo(new ToDo());
+    };
+
+    viewModel.SaveToDo = function () {
+        $("#editModal").modal("hide");
     };
 
     PostToController({
