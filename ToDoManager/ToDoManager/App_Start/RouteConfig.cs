@@ -13,7 +13,7 @@ namespace ToDoManager
             routes.MapRoute(
                 "Manage",
                 "Manage/{action}/{id}",
-                new {controller = "Manage", action = "List", id = UrlParameter.Optional}
+                new {controller = "Manage", action = "Manage", id = UrlParameter.Optional}
             );
 
             routes.MapRoute(
