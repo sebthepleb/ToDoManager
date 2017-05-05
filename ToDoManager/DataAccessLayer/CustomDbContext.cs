@@ -7,7 +7,7 @@ using System.Reflection;
 using DataAccessLayer.CustomAttributes;
 using Shared.Enums;
 
-namespace DataAccessLayer.DataContexts
+namespace DataAccessLayer
 {
     public class CustomDbContext<TEntity> : DbContext where TEntity : BaseEntity<TEntity>, IEntity
     {
