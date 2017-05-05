@@ -84,7 +84,10 @@ namespace DataAccessLayer
 
         public void Save()
         {
-            DateCreated = DateTime.Now;
+            if (Id == 0)
+                DateCreated = DateTime.Now;
+
+            DateUpdated = DateTime.Now;
             UpdateUsername = Environment.UserName;
 
             using (var context = new CustomDbContext<TEntity>(_connectionString))
