@@ -2,7 +2,7 @@
 
 namespace BusinessLayer.Framework
 {
-    public class IocBulkLoad : Attribute
+    public class IocBulkLoadAttribute : Attribute
     {
     }
 }

@@ -19,7 +19,7 @@ namespace BusinessLayer.Framework
         public static void Initialise()
         {
             var types = Assembly.GetExecutingAssembly().GetTypes().ToArray();
-            var bulkLoadInterfaceTypes = types.Where(t => t.IsInterface && t.GetCustomAttribute<IocBulkLoad>() != null);
+            var bulkLoadInterfaceTypes = types.Where(t => t.IsInterface && t.GetCustomAttribute<IocBulkLoadAttribute>() != null);
 
             foreach (var interfaceType in bulkLoadInterfaceTypes)
             {
