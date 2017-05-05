@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity.Migrations;
 using System.Linq;
 using System.Reflection;
 using System.Runtime.CompilerServices;
@@ -38,18 +39,63 @@ namespace DataAccessLayer
         }
 
         public int Id { get; set; }
-        public DateTime DateCreated { get; set; }
-        public DateTime? DateUpdated { get; set; }
-        public string UpdateUsername { get; set; }
+
+        public DateTime DateCreated
+        {
+            get { return GetValue<DateTime>(); }
+            set { SetValue(value); }
+        }
+
+        public DateTime? DateUpdated
+        {
+            get { return GetValue<DateTime?>(); }
+            set { SetValue(value); }
+        }
+
+        public string UpdateUsername
+        {
+            get { return GetValue<string>(); }
+            set { SetValue(value); }
+        }
 
         protected T GetValue<T>([CallerMemberName] string propertyName = null)
         {
             if (propertyName == null)
                 throw new Exception("The property name was not provided.");
 
-            if (_state != EntityStates.ToLoad)
-                return (T) _valuesByPropertyName[propertyName];
+            if (_state == EntityStates.ToLoad)
+                Load();
 
+            return (T) _valuesByPropertyName[propertyName];
+        }
+
+        protected void SetValue<T>(T value, [CallerMemberName] string propertyName = null)
+        {
+            if (propertyName == null)
+                throw new Exception("The property name was not provided.");
+
+            if (_state == EntityStates.ToLoad)
+                Load();
+
+            _valuesByPropertyName[propertyName] = value;
+
+            _state = EntityStates.Dirty;
+        }
+
+        public void Save()
+        {
+            DateCreated = DateTime.Now;
+            UpdateUsername = Environment.UserName;
+
+            using (var context = new CustomDbContext<TEntity>(_connectionString))
+            {
+                context.Entities.AddOrUpdate((TEntity) this);
+                context.SaveChanges();
+            }
+        }
+
+        private void Load()
+        {
             using (var context = new CustomDbContext<TEntity>(_connectionString))
             {
                 var entity = context.Entities.Find(Id);
@@ -60,22 +106,6 @@ namespace DataAccessLayer
             }
 
             _state = EntityStates.Loaded;
-
-            return (T) _valuesByPropertyName[propertyName];
-        }
-
-        protected void SetValue<T>(T value, [CallerMemberName] string propertyName = null)
-        {
-            if (propertyName == null)
-                throw new Exception("The property name was not provided.");
-
-            _valuesByPropertyName[propertyName] = value;
-
-            _state = EntityStates.Dirty;
-        }
-
-        public void Save()
-        {
         }
 
         private static object GetDefault(Type type)
