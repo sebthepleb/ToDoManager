@@ -20,9 +20,9 @@ namespace ToDoManager.Controllers
         }
 
         [HttpGet]
-        [Route("{id:long}")]
+        [Route("{id:int}")]
         [ResponseType(typeof(ToDoModel))]
-        public IHttpActionResult GetToDo(long id)
+        public IHttpActionResult GetToDo(int id)
         {
             var todo = Ioc.Get<IToDoManager>().GetToDoById(id);
             return Ok(todo);
@@ -38,9 +38,9 @@ namespace ToDoManager.Controllers
         }
 
         [HttpPut]
-        [Route("{id:long}")]
+        [Route("{id:int}")]
         [ResponseType(typeof(ToDoModel))]
-        public IHttpActionResult SaveToDo(long id, ToDoModel model)
+        public IHttpActionResult SaveToDo(int id, ToDoModel model)
         {
             if (model == null)
                 return BadRequest("The ToDo model was not provided.");
