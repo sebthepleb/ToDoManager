@@ -94,15 +94,35 @@ namespace DataAccessLayer
             }
         }
 
+        public void Delete()
+        {
+            if (Id == 0)
+                return;
+
+            using (var context = new CustomDbContext<TEntity>())
+            {
+                var entity = context.Entities.Find(Id);
+                
+                if (entity == null)
+                    throw new Exception($"Could not find an {GetType().Name} entity with Id {Id}.");
+
+                context.Entities.Remove(entity);
+                context.SaveChanges();
+            }
+        }
+
         private void Load()
         {
             using (var context = new CustomDbContext<TEntity>())
             {
                 var entity = context.Entities.Find(Id);
-                if (entity != null)
-                    _valuesByPropertyName = entity.GetType()
-                        .GetProperties()
-                        .ToDictionary(p => p.Name, p => p.GetValue(entity));
+
+                if (entity == null)
+                    throw new Exception($"Could not find an {GetType().Name} entity with Id {Id}.");
+
+                _valuesByPropertyName = entity.GetType()
+                    .GetProperties()
+                    .ToDictionary(p => p.Name, p => p.GetValue(entity));
             }
 
             _state = EntityStates.Loaded;
