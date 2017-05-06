@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace BusinessLayer.Framework
+namespace Shared.CustomAttributes
 {
     public class IocBulkLoadAttribute : Attribute
     {

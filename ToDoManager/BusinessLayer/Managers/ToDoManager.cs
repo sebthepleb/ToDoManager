@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using BusinessLayer.Framework;
 using Models.ToDoManager;
+using Shared.CustomAttributes;
 
 namespace BusinessLayer.Managers
 {
@@ -32,7 +32,7 @@ namespace BusinessLayer.Managers
                     Title = "Test 2",
                     Detail = "I am the second test.",
                     DateCreated = DateTime.Parse("02/02/02")
-                },
+                }
             };
         }
 

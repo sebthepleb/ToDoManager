@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using Shared.CustomAttributes;
 
 namespace BusinessLayer.Framework
 {
@@ -18,7 +19,8 @@ namespace BusinessLayer.Framework
 
         public static void Initialise()
         {
-            var types = Assembly.GetExecutingAssembly().GetTypes().ToArray();
+            var assemblies = AppDomain.CurrentDomain.GetAssemblies();
+            var types = assemblies.SelectMany(a => a.GetTypes()).ToArray();
             var bulkLoadInterfaceTypes = types.Where(t => t.IsInterface && t.GetCustomAttribute<IocBulkLoadAttribute>() != null);
 
             foreach (var interfaceType in bulkLoadInterfaceTypes)

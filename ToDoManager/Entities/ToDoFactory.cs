@@ -1,12 +1,23 @@
-﻿namespace Entities
+﻿using DataAccessLayer;
+using Shared.CustomAttributes;
+
+namespace Entities
 {
-    public interface IToDoFactory : IEntityFactory
+    [IocBulkLoad]
+    public interface IToDoFactory : IEntityFactory<IToDo, IToDoList>
     {
-        
     }
 
-    public class ToDoFactory
+    public class ToDoFactory : IToDoFactory
     {
+        public IToDo GetEntity()
+        {
+            return new ToDo();
+        }
 
+        public IToDoList GetEntityList()
+        {
+            return new ToDoList();
+        }
     }
 }

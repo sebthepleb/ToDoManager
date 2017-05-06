@@ -42,7 +42,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Framework\Ioc.cs" />
-    <Compile Include="Framework\IocBulkLoadAttribute.cs" />
     <Compile Include="Managers\ToDoManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -54,6 +53,10 @@
     <ProjectReference Include="..\Models\Models.csproj">
       <Project>{eda1e77f-65b2-4464-8587-46ca5925a1fb}</Project>
       <Name>Models</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Shared\Shared.csproj">
+      <Project>{80E3BDD6-C0DE-4527-971E-BE768374CF50}</Project>
+      <Name>Shared</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

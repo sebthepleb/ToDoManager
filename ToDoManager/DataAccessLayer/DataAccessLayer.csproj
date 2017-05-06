@@ -50,6 +50,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Entity.cs" />
+    <Compile Include="EntityFactory.cs" />
     <Compile Include="EntityList.cs" />
     <Compile Include="CustomAttributes\DalColumn.cs" />
     <Compile Include="CustomAttributes\DalTable.cs" />
