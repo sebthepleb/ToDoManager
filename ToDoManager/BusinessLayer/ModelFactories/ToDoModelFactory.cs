@@ -11,6 +11,7 @@ namespace BusinessLayer.ModelFactories
             {
                 Id = entity.Id,
                 Title = entity.Title,
+                Detail = entity.Detail,
                 DateCreated = entity.DateCreated,
                 DateUpdated = entity.DateUpdated,
                 UpdateUsername = entity.UpdateUsername

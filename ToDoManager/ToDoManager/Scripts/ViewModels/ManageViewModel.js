@@ -48,7 +48,8 @@
             url: url,
             method: method,
             data: data,
-            success: function() {
+            success: function () {
+                viewModel.ToDos.push(viewModel.SelectedToDo());
                 $("#editModal").modal("hide");
             },
             error: function() {
