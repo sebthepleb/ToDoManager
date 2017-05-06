@@ -11,7 +11,7 @@ namespace Entities
     }
 
     [DalTable(ConnectionStrings.ToDoManagerDatabase, "tblToDo", "intToDoId")]
-    public class ToDo : BaseEntity<ToDo>, IToDo
+    public class ToDo : Entity<ToDo>, IToDo
     {
         [DalColumn("vchTitle")]
         public string Title

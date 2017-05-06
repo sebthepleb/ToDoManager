@@ -9,7 +9,7 @@ using Shared.Enums;
 
 namespace DataAccessLayer
 {
-    public class CustomDbContext<TEntity> : DbContext where TEntity : BaseEntity<TEntity>, IEntity
+    public class CustomDbContext<TEntity> : DbContext where TEntity : Entity<TEntity>, IEntity
     {
         public CustomDbContext() : base($"name={GetConnectionString()}")
         {
@@ -35,7 +35,7 @@ namespace DataAccessLayer
         }
     }
 
-    public class EntityConfiguration<TEntity> : EntityTypeConfiguration<TEntity> where TEntity : BaseEntity<TEntity>, IEntity
+    public class EntityConfiguration<TEntity> : EntityTypeConfiguration<TEntity> where TEntity : Entity<TEntity>, IEntity
     {
         public EntityConfiguration()
         {

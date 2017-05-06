@@ -6,7 +6,7 @@ namespace Entities
     {    
     }
 
-    public class ToDoList : BaseEntityList<ToDo>, IToDoList
+    public class ToDoList : EntityList<ToDo>, IToDoList
     {
         public ToDoList()
         {

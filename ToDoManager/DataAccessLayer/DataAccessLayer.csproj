@@ -49,11 +49,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BaseEntity.cs" />
-    <Compile Include="BaseEntityList.cs" />
+    <Compile Include="Entity.cs" />
+    <Compile Include="EntityList.cs" />
     <Compile Include="CustomAttributes\DalColumn.cs" />
     <Compile Include="CustomAttributes\DalTable.cs" />
-    <Compile Include="CustomDbContext.cs" />
+    <Compile Include="EntityDbContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

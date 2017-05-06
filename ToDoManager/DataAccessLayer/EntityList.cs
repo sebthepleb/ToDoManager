@@ -5,7 +5,7 @@ using System.Linq.Expressions;
 
 namespace DataAccessLayer
 {
-    public class BaseEntityList<TEntity> : List<TEntity> where TEntity : BaseEntity<TEntity>, IEntity
+    public class EntityList<TEntity> : List<TEntity> where TEntity : Entity<TEntity>, IEntity
     {
         protected void Populate(Expression<Func<TEntity, bool>> expression = null)
         {

@@ -16,12 +16,12 @@ namespace DataAccessLayer
         void Save();
     }
 
-    public class BaseEntity<TEntity> where TEntity : BaseEntity<TEntity>, IEntity
+    public class Entity<TEntity> where TEntity : Entity<TEntity>, IEntity
     {
         private EntityStates _state;
         private Dictionary<string, object> _valuesByPropertyName;
 
-        protected BaseEntity()
+        protected Entity()
         {
             var type = GetType();
 
@@ -29,7 +29,7 @@ namespace DataAccessLayer
             _valuesByPropertyName = type.GetProperties().ToDictionary(p => p.Name, p => GetDefault(p.PropertyType));
         }
 
-        protected BaseEntity(int id) : this()
+        protected Entity(int id) : this()
         {
             Id = id;
             _state = EntityStates.ToLoad;
