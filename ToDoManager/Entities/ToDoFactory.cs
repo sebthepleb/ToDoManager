@@ -15,6 +15,11 @@ namespace Entities
             return new ToDo();
         }
 
+        public IToDo GetEntity(int id)
+        {
+            return new ToDo(id);
+        }
+
         public IToDoList GetEntityList()
         {
             return new ToDoList();

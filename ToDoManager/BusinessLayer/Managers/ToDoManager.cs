@@ -1,5 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using System.Linq;
+using BusinessLayer.Framework;
+using BusinessLayer.ModelFactories;
+using Entities;
 using Models.ToDoManager;
 using Shared.CustomAttributes;
 
@@ -9,7 +12,7 @@ namespace BusinessLayer.Managers
     public interface IToDoManager
     {
         List<ToDoModel> GetAllToDos();
-        ToDoModel GetToDoById(long id);
+        ToDoModel GetToDoById(int id);
         ToDoModel SaveToDo(ToDoModel model);
     }
 
@@ -17,40 +20,29 @@ namespace BusinessLayer.Managers
     {
         public List<ToDoModel> GetAllToDos()
         {
-            return new List<ToDoModel>
-            {
-                new ToDoModel
-                {
-                    Id = 1,
-                    Title = "Test 1",
-                    Detail = "I am the first test.",
-                    DateCreated = DateTime.Parse("01/01/01")
-                },
-                new ToDoModel
-                {
-                    Id = 2,
-                    Title = "Test 2",
-                    Detail = "I am the second test.",
-                    DateCreated = DateTime.Parse("02/02/02")
-                }
-            };
+            return Ioc.Get<IToDoFactory>()
+                .GetEntityList()
+                .Select(td => td.ToModel())
+                .ToList();
         }
 
-        public ToDoModel GetToDoById(long id)
+        public ToDoModel GetToDoById(int id)
         {
-            return new ToDoModel
-            {
-                Id = id,
-                Title = $"Test {id}",
-                Detail = $"I am test {id}.",
-                DateCreated = DateTime.Now,
-                UpdateUsername = "Hughbert.Cumberdale"
-            };
+            return Ioc.Get<IToDoFactory>()
+                .GetEntity(id)
+                .ToModel();
         }
 
         public ToDoModel SaveToDo(ToDoModel model)
         {
-            throw new NotImplementedException();
+            var factory = Ioc.Get<IToDoFactory>();
+            var todo = model.Id == null ? factory.GetEntity() : factory.GetEntity(model.Id.Value);
+
+            todo.Title = model.Title;
+            todo.Detail = model.Detail;
+            todo.Save();
+
+            return todo.ToModel();
         }
     }
 }

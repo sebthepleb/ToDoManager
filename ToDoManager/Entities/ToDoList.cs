@@ -2,7 +2,7 @@
 
 namespace Entities
 {
-    public interface IToDoList
+    public interface IToDoList : IEntityList<ToDo>
     {    
     }
 

@@ -43,9 +43,14 @@
   <ItemGroup>
     <Compile Include="Framework\Ioc.cs" />
     <Compile Include="Managers\ToDoManager.cs" />
+    <Compile Include="ModelFactories\ToDoModelFactory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\DataAccessLayer\DataAccessLayer.csproj">
+      <Project>{2e3501eb-9a45-4f17-91f0-1017c66cf644}</Project>
+      <Name>DataAccessLayer</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Entities\Entities.csproj">
       <Project>{4687296e-d9b3-4b0c-93fb-42bc283a583b}</Project>
       <Name>Entities</Name>

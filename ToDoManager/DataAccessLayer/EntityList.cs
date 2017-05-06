@@ -5,11 +5,11 @@ using System.Linq.Expressions;
 
 namespace DataAccessLayer
 {
-    public interface IEntityList
+    public interface IEntityList<TEntity> : IList<TEntity>
     {
     }
 
-    public class EntityList<TEntity> : List<TEntity>, IEntityList where TEntity : Entity<TEntity>, IEntity
+    public class EntityList<TEntity> : List<TEntity>, IEntityList<TEntity> where TEntity : Entity<TEntity>, IEntity
     {
         protected void Populate(Expression<Func<TEntity, bool>> expression = null)
         {
