@@ -29,6 +29,25 @@
         viewModel.EditToDo(new ToDo());
     };
 
+    viewModel.DeleteToDo = function() {
+        var todo = viewModel.SelectedToDo();
+
+        if (todo.Id == null)
+            return;
+
+        PostToController({
+            url: "api/v1/ToDo/" + todo.Id,
+            method: Verbs.DELETE,
+            success: function() {
+                viewModel.ToDos.remove(todo);
+                $("#editModal").modal("hide");
+            },
+            error: function() {
+                viewModel.SaveErrored(true);
+            }
+        });
+    };
+
     viewModel.SaveToDo = function () {
 
         viewModel.SaveErrored(false);

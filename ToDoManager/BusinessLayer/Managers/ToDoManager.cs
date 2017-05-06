@@ -14,6 +14,7 @@ namespace BusinessLayer.Managers
         List<ToDoModel> GetAllToDos();
         ToDoModel GetToDoById(int id);
         ToDoModel SaveToDo(ToDoModel model);
+        void DeleteToDo(int id);
     }
 
     public class ToDoManager : IToDoManager
@@ -43,6 +44,11 @@ namespace BusinessLayer.Managers
             todo.Save();
 
             return todo.ToModel();
+        }
+
+        public void DeleteToDo(int id)
+        {
+            Ioc.Get<IToDoFactory>().GetEntity(id).Delete();
         }
     }
 }

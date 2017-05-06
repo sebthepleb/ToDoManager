@@ -51,5 +51,13 @@ namespace ToDoManager.Controllers
             var todo = Ioc.Get<IToDoManager>().SaveToDo(model);
             return Ok(todo);
         }
+
+        [HttpDelete]
+        [Route("{id:int}")]
+        public IHttpActionResult DeleteToDo(int id)
+        {
+            Ioc.Get<IToDoManager>().DeleteToDo(id);
+            return Ok(new {});
+        }
     }
 }
