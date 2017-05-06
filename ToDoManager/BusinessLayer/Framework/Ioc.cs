@@ -19,8 +19,7 @@ namespace BusinessLayer.Framework
 
         public static void Initialise()
         {
-            var assemblies = AppDomain.CurrentDomain.GetAssemblies();
-            var types = assemblies.SelectMany(a => a.GetTypes()).ToArray();
+            var types = GetTypes();
             var bulkLoadInterfaceTypes = types.Where(t => t.IsInterface && t.GetCustomAttribute<IocBulkLoadAttribute>() != null);
 
             foreach (var interfaceType in bulkLoadInterfaceTypes)
@@ -30,6 +29,13 @@ namespace BusinessLayer.Framework
                 if (inheritingType != null)
                     _typesByInterface.Add(interfaceType, inheritingType);
             }
+        }
+
+        private static Type[] GetTypes()
+        {
+            var assemblies = AppDomain.CurrentDomain.GetAssemblies();
+            var types = assemblies.SelectMany(a => a.GetTypes()).ToArray();
+            return types;
         }
 
         public static TInterface Get<TInterface>() where TInterface : class
@@ -47,7 +53,15 @@ namespace BusinessLayer.Framework
             var interfaceType = typeof(TInterface);
 
             if (!_typesByInterface.ContainsKey(interfaceType))
-                throw new Exception("Failed to find interface in the store.");
+            {
+                var types = GetTypes();
+                var inheritingType = types.FirstOrDefault(t => !t.IsInterface && interfaceType.IsAssignableFrom(t));
+                
+                if (inheritingType == null)
+                    throw new Exception($"Failed to find the inheriting type of {interfaceType.Name}.");
+
+                _typesByInterface.Add(interfaceType, inheritingType);
+            }
 
             var type = _typesByInterface[interfaceType];
 

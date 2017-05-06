@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Data.Entity;
 using System.Data.Entity.ModelConfiguration;
+using System.Data.Entity.SqlServer;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
@@ -13,6 +14,10 @@ namespace DataAccessLayer
     {
         public CustomDbContext() : base($"name={GetConnectionString()}")
         {
+            var type = typeof(SqlProviderServices);
+
+            if (type == null)
+                throw new Exception("Reference to System.Data.Entity.SqlServer has been removed.");
         }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
