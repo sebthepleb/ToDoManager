@@ -2,9 +2,7 @@
 using System.Collections.Generic;
 using System.Data.Entity.Migrations;
 using System.Linq;
-using System.Reflection;
 using System.Runtime.CompilerServices;
-using DataAccessLayer.CustomAttributes;
 using Shared.Enums;
 
 namespace DataAccessLayer
@@ -20,7 +18,6 @@ namespace DataAccessLayer
 
     public class BaseEntity<TEntity> where TEntity : BaseEntity<TEntity>, IEntity
     {
-        private readonly ConnectionStrings _connectionString;
         private EntityStates _state;
         private Dictionary<string, object> _valuesByPropertyName;
 
@@ -29,7 +26,6 @@ namespace DataAccessLayer
             var type = GetType();
 
             _state = EntityStates.New;
-            _connectionString = GetType().GetCustomAttribute<DalTable>().ConnectionString;
             _valuesByPropertyName = type.GetProperties().ToDictionary(p => p.Name, p => GetDefault(p.PropertyType));
         }
 
@@ -91,7 +87,7 @@ namespace DataAccessLayer
             DateUpdated = DateTime.Now;
             UpdateUsername = Environment.UserName;
 
-            using (var context = new CustomDbContext<TEntity>(_connectionString))
+            using (var context = new CustomDbContext<TEntity>())
             {
                 context.Entities.AddOrUpdate((TEntity) this);
                 context.SaveChanges();
@@ -100,7 +96,7 @@ namespace DataAccessLayer
 
         private void Load()
         {
-            using (var context = new CustomDbContext<TEntity>(_connectionString))
+            using (var context = new CustomDbContext<TEntity>())
             {
                 var entity = context.Entities.Find(Id);
                 if (entity != null)

@@ -11,7 +11,7 @@ namespace DataAccessLayer
 {
     public class CustomDbContext<TEntity> : DbContext where TEntity : BaseEntity<TEntity>, IEntity
     {
-        public CustomDbContext(ConnectionStrings connectionString) : base($"name={connectionString}")
+        public CustomDbContext() : base($"name={GetConnectionString()}")
         {
         }
 
@@ -23,6 +23,16 @@ namespace DataAccessLayer
         }
 
         public DbSet<TEntity> Entities { get; set; }
+
+        private static ConnectionStrings GetConnectionString()
+        {
+            var connectionString = typeof(TEntity).GetCustomAttribute<DalTable>()?.ConnectionString;
+            
+            if (connectionString == null)
+                throw new Exception($"No connection string was found for entity {typeof(TEntity).Name}");
+
+            return connectionString.Value;
+        }
     }
 
     public class EntityConfiguration<TEntity> : EntityTypeConfiguration<TEntity> where TEntity : BaseEntity<TEntity>, IEntity

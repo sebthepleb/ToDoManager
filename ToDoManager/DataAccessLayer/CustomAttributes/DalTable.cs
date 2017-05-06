@@ -12,8 +12,8 @@ namespace DataAccessLayer.CustomAttributes
             IdentityColumnName = identityColumnName;
         }
 
-        public ConnectionStrings ConnectionString { get; set; }
-        public string TableName { get; set; }
-        public string IdentityColumnName { get; set; }
+        public ConnectionStrings ConnectionString { get; }
+        public string TableName { get; }
+        public string IdentityColumnName { get; }
     }
 }

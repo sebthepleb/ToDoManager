@@ -9,6 +9,6 @@ namespace DataAccessLayer.CustomAttributes
             ColumnName = columnName;
         }
 
-        public string ColumnName { get; set; }
+        public string ColumnName { get; }
     }
 }
