@@ -2,6 +2,7 @@
 	ON [dbo].[tblToDo]
 	FOR INSERT
 	AS
+	SET NOCOUNT ON
 	INSERT tblAuditToDo
 		SELECT GETDATE(), 'I', *
 		FROM INSERTED
