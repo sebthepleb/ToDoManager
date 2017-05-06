@@ -15,6 +15,7 @@ namespace DataAccessLayer
         DateTime DateCreated { get; set; }
         DateTime? DateUpdated { get; set; }
         string UpdateUsername { get; set; }
+        void Save();
     }
 
     public class BaseEntity<TEntity> where TEntity : BaseEntity<TEntity>, IEntity
