@@ -48,8 +48,10 @@
             url: url,
             method: method,
             data: data,
-            success: function () {
-                viewModel.ToDos.push(viewModel.SelectedToDo());
+            success: function (model) {
+                var toDo = viewModel.SelectedToDo();
+                toDo.Load(model);
+                viewModel.ToDos.push(toDo);
                 $("#editModal").modal("hide");
             },
             error: function() {
