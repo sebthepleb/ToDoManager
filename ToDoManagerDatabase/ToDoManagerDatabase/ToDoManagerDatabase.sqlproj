@@ -71,6 +71,13 @@
     <Build Include="Tables\Triggers\trg_tblToDo_Update.sql" />
     <Build Include="Tables\Triggers\trg_tblToDo_Insert.sql" />
     <Build Include="Tables\Triggers\trg_tblToDo_Delete.sql" />
+    <Build Include="Tables\tblCategory.sql" />
+    <Build Include="Tables\Triggers\trg_tblCategory_Update.sql" />
+    <Build Include="Tables\Triggers\trg_tblCategory_Delete.sql" />
+    <Build Include="Tables\Triggers\trg_tblCategory_Insert.sql" />
+    <Build Include="Tables\Audit\tblAuditCategory.sql" />
+    <Build Include="Tables\tblCategoryToDo.sql" />
+    <Build Include="Views\vwToDosWithCategorys.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="ToDoManagerDatabase.publish.xml" />
