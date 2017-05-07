@@ -2,6 +2,10 @@
     ViewBag.Title = "About";
 }
 
+@Scripts.Render("~/Scripts/highlight.pack.js")
+@Styles.Render("~/Content/vs.css")
+<script>hljs.initHighlightingOnLoad();</script>
+
 <!-- TODO: Turn into a simple knockout view. -->
 
 <div class="well">
@@ -26,7 +30,7 @@
         <li>
             <div class="col-xs-7">Are you familiar with the Microsoft ORM Entity Framework?</div>
             <div class="col-xs-1"><i class="fa fa-check" title="Yes"></i></div>
-            <div class="col-xs-1"><i class="fa fa-minus" title="In progress"></i></div>
+            <div class="col-xs-1"><i class="fa fa-check" title="Yes"></i></div>
         </li>
         <li>
             <div class="col-xs-7">Can you create a new Entity Framework diagram and either:</div>
@@ -34,12 +38,12 @@
                 <ol type="a">
                     <li>
                         <div class="col-xs-7">bring existing table, views and functions into the diagram (Database First)</div>
-                        <div class="col-xs-1"><i class="fa fa-check" title="Yes"></i></div>
+                        <div class="col-xs-1"><i class="fa fa-minus" title="Haven't really used diagrams"></i></div>
                         <div class="col-xs-1"><i class="fa fa-close"></i></div>
                     </li>
                     <li>
                         <div class="col-xs-7">create models then deploy them to the DB (Code First)</div>
-                        <div class="col-xs-1"><i class="fa fa-check" title="Yes"></i></div>
+                        <div class="col-xs-1"><i class="fa fa-minus" title="Haven't really used diagrams"></i></div>
                         <div class="col-xs-1"><i class="fa fa-close"></i></div>
                     </li>
                 </ol>
@@ -48,32 +52,72 @@
         <li>
             <div class="col-xs-7">Can you write Linq queries?</div>
             <div class="col-xs-1"><i class="fa fa-check" title="Yes <3"></i></div>
-            <div class="col-xs-1"><i class="fa fa-check" title="Yes (CustomDbContext has some)"></i></div>
+            <div class="col-xs-1"><i class="fa fa-check" title="Yes"></i></div>
         </li>
         <li>
             <div class="col-xs-7">Are you confident with interacting with the DB via the Entity Framework context?</div>
-            <div class="col-xs-1"><i class="fa fa-minus" title="Not used EF a lot, but wouldn't take long to learn"></i></div>
+            <div class="col-xs-1"><i class="fa fa-minus" title="Not used EF a lot"></i></div>
             <div class="col-xs-1"><i class="fa fa-check" title="Yes"></i></div>
         </li>
         <li>
             <div class="col-xs-7">Are you familiar with design patterns? What is your favourite and why?</div>
-            <div class="col-xs-1"><i class="fa fa-minus" title="Not particularly"></i></div>
-            <div class="col-xs-1"><i class="fa fa-check" title="Factory pattern for IOC, because it makes IOC easier."></i></div>
+            <div class="col-xs-1"><i class="fa fa-check" title="Not particularly"></i></div>
+            <div class="col-xs-1"><i class="fa fa-check" title="Factory and repository pattern for IOC."></i></div>
         </li>
         <li>
             <div class="col-xs-7">Can you successfully implement the Repository design pattern?</div>
             <div class="col-xs-1"><i class="fa fa-check" title="Yes"></i></div>
-            <div class="col-xs-1"><i class="fa fa-minus" title="In progress"></i></div>
+            <div class="col-xs-1"><i class="fa fa-check" title="Yes"></i></div>
         </li>
         <li>
             <div class="col-xs-7">Can you write SQL to interrogate a MS SQL database?</div>
             <div class="col-xs-1"><i class="fa fa-check" title="Yes"></i></div>
-            <div class="col-xs-1"><i class="fa fa-minus" title="In progress"></i></div>
+            <div class="col-xs-1"><i class="fa fa-check" title="See below"></i></div>
         </li>
         <li>
-            <div class="col-xs-7">Can you create an SQL view?</div>
+            <div class="col-xs-7">Can you create a SQL view?</div>
             <div class="col-xs-1"><i class="fa fa-check" title="Yes"></i></div>
-            <div class="col-xs-1"><i class="fa fa-minus" title="In progress"></i></div>
+            <div class="col-xs-1"><i class="fa fa-check" title="Yes"></i></div>
         </li>
     </ol>
+</div>
+
+<div class="well">
+    <a href="#sqlCode" data-toggle="collapse">Show SQL code</a>
+    <div id="sqlCode" class="collapse">
+        <p>The following was used for adding test data.</p>
+        <pre><code class="sql">USE ToDoManager
+
+DELETE tblCategoryToDo
+DELETE tblToDo
+DELETE tblCategory
+
+SET IDENTITY_INSERT tblToDo ON
+
+;WITH Numbers(intNumber) AS (
+	SELECT 1 as intNumber
+	UNION ALL
+	SELECT intNumber + 1 FROM Numbers WHERE intNumber + 1 <= 10
+)
+
+INSERT tblToDo (intToDoId, vchTitle, vchDetail, dteDateCreated, dteDateUpdated, vchUpdateUsername)
+	SELECT n.intNumber, CONCAT('Title ', n.intNumber), CONCAT('Detail ', n.intNumber), DATEADD(DAY, n.intNumber, GETDATE()), null, 'Seb'
+	FROM Numbers n
+	OPTION (maxrecursion 10)
+
+SET IDENTITY_INSERT tblToDo OFF
+
+SET IDENTITY_INSERT tblCategory ON
+
+INSERT tblCategory (intCategoryId, vchCategoryName, dteDateCreated, dteDateUpdated, vchUpdateUsername)
+	SELECT 1, 'A category', GETDATE(), NULL, 'Seb'
+	UNION SELECT 2, 'Another category', GETDATE(), NULL, 'Seb'
+
+SET IDENTITY_INSERT tblCategory OFF
+
+INSERT tblCategoryToDo (intToDoId, intCategoryId, dteDateCreated, dteDateUpdated, vchUpdateUsername)
+	SELECT intToDoId, intCategoryId, GETDATE(), NULL, 'Seb'
+	FROM tblToDo
+	CROSS JOIN tblCategory</code></pre>
+    </div>
 </div>
