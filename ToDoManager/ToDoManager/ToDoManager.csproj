@@ -126,10 +126,12 @@
     <Content Include="Content\font-awesome.css" />
     <Content Include="Content\font-awesome.min.css" />
     <Content Include="Content\Site.css" />
+    <Content Include="Content\vs.css" />
     <Content Include="fonts\fontawesome-webfont.svg" />
     <Content Include="packages.config" />
     <Content Include="Scripts\BindingHandlers\DateHandler.js" />
     <Content Include="Scripts\Common.js" />
+    <Content Include="Scripts\highlight.pack.js" />
     <Content Include="Scripts\knockout-3.4.2.debug.js" />
     <Content Include="Scripts\knockout-3.4.2.js" />
     <Content Include="Scripts\Models\ToDo.js" />
